@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Image, TouchableOpacity, Alert } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Torch from "react-native-torch";
 import RNShake from "react-native-shake";
+
 const App = () => {
   const [toggle, setToggle] = useState(false);
 
   const handleChangeToggle = () => setToggle((oldToggle) => !oldToggle);
 
   useEffect(() => {
-    //Liga o flash do celular
     Torch.switchState(toggle);
   }, [toggle]);
 
   useEffect(() => {
     const subscription = RNShake.addListener(() => {
-      //Quando chacoalhar o celular,mudaremos o toggle
       setToggle((oldToggle) => !oldToggle);
     });
-    /*Essa função vai ser chamada quando o componente for ser desmontado */
+
     return () => subscription.remove();
   }, []);
 
@@ -32,7 +31,6 @@ const App = () => {
               : require("./assets/icons/eco-light-off.png")
           }
         />
-
         <Image
           style={style.dioLogo}
           source={
@@ -55,7 +53,7 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  containerLight: {
+  containertLight: {
     flex: 1,
     backgroundColor: "white",
     alignItems: "center",
@@ -66,6 +64,7 @@ const style = StyleSheet.create({
     alignSelf: "center",
     width: 150,
     height: 150,
+    marginTop: 175,
   },
   lightingOff: {
     resizeMode: "contain",
@@ -77,7 +76,7 @@ const style = StyleSheet.create({
   dioLogo: {
     resizeMode: "contain",
     alignSelf: "center",
-    width: 200,
-    height: 200,
+    width: 250,
+    height: 250,
   },
 });
